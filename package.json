@@ -1,10 +1,19 @@
 {
   "name": "parcel-bundler",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "bin": {
+    "parcel": "bin/cli.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test mocha",
+    "format": "prettier --write './{src,bin,test}/**/*.{js,json,md}'",
+    "build": "babel src -d lib",
+    "prepare": "npm run build",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": ["prettier --write", "git add"]
   },
   "repository": {
     "type": "git",
@@ -16,5 +25,57 @@
   "bugs": {
     "url": "https://github.com/cecil-su/parcel-bundler/issues"
   },
-  "homepage": "https://github.com/cecil-su/parcel-bundler#readme"
+  "homepage": "https://github.com/cecil-su/parcel-bundler#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "coffeescript": "^2.1.0",
+    "cross-env": "^5.1.1",
+    "husky": "^0.14.3",
+    "less": "^2.7.3",
+    "lint-staged": "^6.0.0",
+    "mocha": "^4.0.1",
+    "ncp": "^2.0.0",
+    "nib": "^1.1.2",
+    "node-sass": "^4.7.2",
+    "nyc": "^11.3.0",
+    "postcss-modules": "^1.1.0",
+    "posthtml-include": "^1.1.0",
+    "prettier": "^1.9.2",
+    "rimraf": "^2.6.2",
+    "stylus": "^0.54.5",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-generator": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babylon": "^6.18.0",
+    "babylon-walk": "^1.0.2",
+    "browser-resolve": "^1.11.2",
+    "chalk": "^2.3.0",
+    "chokidar": "^1.7.0",
+    "commander": "^2.12.2",
+    "cssnano": "^3.10.0",
+    "get-port": "^3.2.0",
+    "glob": "^7.1.2",
+    "htmlnano": "^0.1.6",
+    "is-url": "^1.2.2",
+    "js-yaml": "^3.10.0",
+    "json5": "^0.5.1",
+    "micromatch": "^3.1.4",
+    "mkdirp": "^0.5.1",
+    "node-libs-browser": "^2.1.0",
+    "opn": "^5.1.0",
+    "physical-cpu-count": "^2.0.0",
+    "postcss": "^6.0.14",
+    "postcss-value-parser": "^3.3.0",
+    "posthtml": "^0.11.0",
+    "resolve": "^1.5.0",
+    "serve-static": "^1.13.1",
+    "uglify-es": "^3.2.2",
+    "v8-compile-cache": "^1.1.0",
+    "worker-farm": "^1.5.2",
+    "ws": "^3.3.3"
+  }
 }
